@@ -1,10 +1,27 @@
 Rails.application.routes.draw do
 
-  resources :racers
-  resources :races
-  resources :racers do
-    post "entries" => "racers#create_entry"
+  namespace :api, defaults: {format: 'json'} do
+    get 'races', to: 'races#index'
+    get 'races/:id', to: 'races#show', as: 'race'
+    get 'races/:race_id/results', to: 'results#index', as: 'race_results'
+    get 'races/:race_id/results/:id', to: 'results#show', as: 'race_result'
+    get 'racers', to: 'racers#index'
+    get 'racers/:id', to: 'racers#show', as: 'racer'
+    get 'racers/:racer_id/entries', to: 'entries#index', as: 'racer_entries'
+    get 'racers/:racer_id/entries/:id', to: 'entries#show', as: 'racer_entry'
   end
+  # namespace :api, defaults: {format: 'json'} do
+  #   resources :races
+  #   resources :races do
+  #     resources :results
+  #   end
+  # end  
+
+  # resources :racers
+  # resources :races
+  # resources :racers do
+  #   post "entries" => "racers#create_entry"
+  # end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
