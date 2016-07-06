@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   namespace :api, defaults: {format: 'json'} do
-    get 'races', to: 'races#index'
-    get 'races/:id', to: 'races#show', as: 'race'
+    # get 'races', to: 'races#index'
+    # get 'races/:id', to: 'races#show', as: 'race'
     get 'races/:race_id/results', to: 'results#index', as: 'race_results'
     get 'races/:race_id/results/:id', to: 'results#show', as: 'race_result'
     get 'racers', to: 'racers#index'
@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     get 'racers/:racer_id/entries', to: 'entries#index', as: 'racer_entries'
     get 'racers/:racer_id/entries/:id', to: 'entries#show', as: 'racer_entry'
 
-    post 'races', to: 'races#create'
-    put 'races/:id', to: 'races#update', as: 'races_update' 
+    resources :races
   end
   # namespace :api, defaults: {format: 'json'} do
   #   resources :races

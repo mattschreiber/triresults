@@ -39,6 +39,11 @@ module Api
     	end
 		end
 
+		def destroy
+			@race.destroy
+			render nothing: true, status: :no_content
+		end
+
 		private
     	# Use callbacks to share common setup or constraints between actions.
     	def set_race
