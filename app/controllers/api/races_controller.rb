@@ -29,6 +29,11 @@ module Api
 			end
 		end
 
+		def update
+			@race.update_attributes(race_params)
+			render json: @race
+		end
+
 		private
     	# Use callbacks to share common setup or constraints between actions.
     	def set_race

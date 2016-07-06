@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     get 'racers/:racer_id/entries/:id', to: 'entries#show', as: 'racer_entry'
 
     post 'races', to: 'races#create'
+    put 'races/:id', to: 'races#update', as: 'races_update' 
   end
   # namespace :api, defaults: {format: 'json'} do
   #   resources :races
