@@ -30,8 +30,13 @@ module Api
 		end
 
 		def update
-			@race.update_attributes(race_params)
-			render json: @race
+			# @race.update_attributes(race_params)
+			# render json: @race
+      if @race.update(race_params)
+				render json: @race
+      else
+      	render json: @race.errors, status: :unprocessable_entity
+    	end
 		end
 
 		private
