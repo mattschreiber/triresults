@@ -3,6 +3,6 @@ module Api
   	# before_action :authenticate_user!, except: [:index, :show ]
    #  before_action :user_signed_in?, except: [:index, :show ]
   	protect_from_forgery with: :null_session
-  	respond_to :json
+  	# respond_to :json
   end
 end

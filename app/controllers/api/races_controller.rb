@@ -1,7 +1,6 @@
 module Api
 	class RacesController < Api::BaseController
 		#api/races
-		before_action :set_race, only: [:show, :edit, :update, :destroy]
 		def index
 			if !request.accept || request.accept == "*/*"
 				render plain: "/api/races, offset=[#{params[:offset]}], limit=[#{params[:limit]}]"
@@ -14,8 +13,8 @@ module Api
 			if !request.accept || request.accept == "*/*"
 				render plain: "/api/races/#{params[:id]}"
 			else
-				# respond_with @race
-				render json: @race
+				@race = Race.find(params[:id])
+				render :template => 'races/show'
 			end
 		end
 
@@ -32,6 +31,7 @@ module Api
 		def update
 			# @race.update_attributes(race_params)
 			# render json: @race
+			@race = Race.find(params[:id])
       if @race.update(race_params)
 				render json: @race
       else
@@ -40,21 +40,20 @@ module Api
 		end
 
 		def destroy
+			@race = Race.find(params[:id])
 			@race.destroy
 			render nothing: true, status: :no_content
 		end
 
+		rescue_from Mongoid::Errors::DocumentNotFound do |exception|
+      #render plain: "woops: cannot find race[#{params[:id]}]", status: :not_found
+      render :status=>:not_found,
+        :template=>"api/races/error_msg",
+        :locals=>{ :msg=>"woops: cannot find race[#{params[:id]}]" }
+    end
+
 		private
-    	# Use callbacks to share common setup or constraints between actions.
-    	def set_race
-      	@race = Race.find(params[:id])
-
-        rescue Mongoid::Errors::DocumentNotFound => e
-          respond_to do |format|
-            format.json { render json: {msg:"race[#{params[:id]}] not found"}, status: :not_found }
-          end
-    	end
-
+\
     	# Never trust parameters from the scary internet, only allow the white list through.
     	def race_params
       	params.require(:race).permit(:name, :date, :city, :state, :swim_distance, :swim_units, :bike_distance, :bike_units, :run_distance, :run_units)

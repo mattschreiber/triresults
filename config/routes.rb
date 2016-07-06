@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  namespace :api, defaults: {format: 'json'} do
+  namespace :api do
     # get 'races', to: 'races#index'
     # get 'races/:id', to: 'races#show', as: 'race'
     get 'races/:race_id/results', to: 'results#index', as: 'race_results'
