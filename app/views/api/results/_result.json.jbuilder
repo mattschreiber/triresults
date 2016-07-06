@@ -1,5 +1,3 @@
-json.source "partial: app/views/api/results/_result.json.jbuilder"
-
 json.place @result.overall_place
 json.time format_hours @result.secs
 json.last_name @result.last_name

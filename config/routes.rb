@@ -3,14 +3,17 @@ Rails.application.routes.draw do
   namespace :api do
     # get 'races', to: 'races#index'
     # get 'races/:id', to: 'races#show', as: 'race'
-    get 'races/:race_id/results', to: 'results#index', as: 'race_results'
-    get 'races/:race_id/results/:id', to: 'results#show', as: 'race_result'
+    # get 'races/:race_id/results', to: 'results#index', as: 'race_results'
+    # get 'races/:race_id/results/:id', to: 'results#show', as: 'race_result'
     get 'racers', to: 'racers#index'
     get 'racers/:id', to: 'racers#show', as: 'racer'
     get 'racers/:racer_id/entries', to: 'entries#index', as: 'racer_entries'
     get 'racers/:racer_id/entries/:id', to: 'entries#show', as: 'racer_entry'
 
     resources :races
+      resources :races do
+        resources :results
+      end
   end
   # namespace :api, defaults: {format: 'json'} do
   #   resources :races
