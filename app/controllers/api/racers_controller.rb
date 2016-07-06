@@ -1,5 +1,5 @@
 module Api
-	class RacersController < ApplicationController
+	class RacersController < Api::BaseController
 
 		#/api/racers
 		def index

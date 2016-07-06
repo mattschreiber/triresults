@@ -1,5 +1,5 @@
 module Api
-	class RacesController < ApplicationController
+	class RacesController < Api::BaseController
 		#api/races
 		def index
 			if !request.accept || request.accept == "*/*"
@@ -14,6 +14,14 @@ module Api
 				render plain: "/api/races/#{params[:id]}"
 			else
 				#real implementation ...
+			end
+		end
+
+		def create
+			if !request.accept || request.accept == "*/*"
+				render plain: :nothing, status: :ok
+			else
+				#real implementation
 			end
 		end
 	end
