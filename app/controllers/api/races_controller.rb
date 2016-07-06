@@ -1,6 +1,7 @@
 module Api
 	class RacesController < Api::BaseController
 		#api/races
+		before_action :set_race, only: [:show, :edit, :update, :destroy]
 		def index
 			if !request.accept || request.accept == "*/*"
 				render plain: "/api/races, offset=[#{params[:offset]}], limit=[#{params[:limit]}]"
@@ -13,7 +14,8 @@ module Api
 			if !request.accept || request.accept == "*/*"
 				render plain: "/api/races/#{params[:id]}"
 			else
-				#real implementation ...
+				# respond_with @race
+				render json: @race
 			end
 		end
 
@@ -31,6 +33,11 @@ module Api
     	# Use callbacks to share common setup or constraints between actions.
     	def set_race
       	@race = Race.find(params[:id])
+
+        rescue Mongoid::Errors::DocumentNotFound => e
+          respond_to do |format|
+            format.json { render json: {msg:"race[#{params[:id]}] not found"}, status: :not_found }
+          end
     	end
 
     	# Never trust parameters from the scary internet, only allow the white list through.
