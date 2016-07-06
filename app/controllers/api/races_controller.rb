@@ -52,6 +52,11 @@ module Api
         :locals=>{ :msg=>"woops: cannot find race[#{params[:id]}]" }
     end
 
+    rescue_from ActionView::MissingTemplate do |exception|
+			Rails.logger.debug exception
+			render plain: "woops: we do not support that content-type[#{request.accept}])", status: :unsupported_media_type
+		end
+
 		private
 \
     	# Never trust parameters from the scary internet, only allow the white list through.
