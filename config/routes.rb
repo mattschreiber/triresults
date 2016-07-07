@@ -22,11 +22,11 @@ Rails.application.routes.draw do
   #   end
   # end  
 
-  # resources :racers
-  # resources :races
-  # resources :racers do
-  #   post "entries" => "racers#create_entry"
-  # end
+  resources :racers
+  resources :races
+  resources :racers do
+    post "entries" => "racers#create_entry"
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
