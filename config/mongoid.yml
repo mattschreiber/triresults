@@ -1,16 +1,16 @@
-development:
+# development:
   # Configure available database clients. (required)
-  clients:
+  # clients:
     # Defines the default client. (required)
-    default:
+    # default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: triresults1_development
+      # database: triresults1_development
       # Provides the hosts the default client can connect to. Must be an array
       # of host:port pairs. (required)
-      hosts:
-        - localhost:27017
-      options:
+      # hosts:
+      #   - localhost:27017
+      # options:
         # Change the default write concern. (default = { w: 1 })
         # write:
         #   w: 1
@@ -101,7 +101,7 @@ development:
 
 
   # Configure Mongoid specific options. (optional)
-  options:
+  # options:
     # Includes the root model name in json serialization. (default: false)
     # include_root_in_json: false
 
@@ -135,6 +135,13 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+development:
+    clients:
+        default:
+            uri: <%=ENV['MONGOLAB_URI']%>
+            options:
+                connect_timeout: 15
 
 production:
     clients:
