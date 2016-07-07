@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  root 'races#index'
   namespace :api do
     # get 'races', to: 'races#index'
     # get 'races/:id', to: 'races#show', as: 'race'
